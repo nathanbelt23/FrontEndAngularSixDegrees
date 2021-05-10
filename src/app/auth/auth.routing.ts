@@ -3,11 +3,19 @@ import { NgModule } from '@angular/core';
 
 
 import { LoginComponent } from './login/login.component';
+import { AuthContainerComponent } from './auth-container/auth-container.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
+    { path: 'registerlogin', component: AuthContainerComponent,
+    children:[
 
-
-    { path: 'login', component: LoginComponent },
+        { path: '', component: LoginComponent },
+        { path: 'login', component: LoginComponent },
+        { path: 'register', component: RegisterComponent },
+    ]
+    },
+    
 ];
 
 @NgModule({

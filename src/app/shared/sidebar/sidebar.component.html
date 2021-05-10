@@ -16,8 +16,11 @@
                         <li><a><i class="ti-wallet"></i> {{ProfileService.celular}}</a></li>
                         <li><a [href]="'mailto:'+ProfileService.correo"><i class="ti-email"></i> {{ProfileService.correo|slice:0:10}}...</a></li>
                         <li>
-                            <a routerLink="/login"> <i class="ti-alert"></i> Log Out</a>
+                            <a (click)="UsuarioService.cerraSession()"> <i class="ti-alert"></i> Log Out</a>
                         </li>
+
+
+
 
                     </ul>
                 </li>

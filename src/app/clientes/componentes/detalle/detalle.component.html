@@ -1,0 +1,41 @@
+<br />
+<br />
+<br />
+
+<div class="row animate__animated animate__fadeIn" *ngIf="pelicula">
+    <div class="col-md-4">
+        <!-- Imagen -->
+
+        <img class="w-100 img-thumbnail" [src]="pelicula.urlPelicula | imagen" />
+    </div>
+
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col">
+                <h3>{{ pelicula.titulo }}</h3>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-outline-info" routerLink="/home/principal">
+            Regresar
+          </button>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div>
+                {{ pelicula.descripcion }}
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col"></div>
+        </div>
+        <div class="row mt-3 w-100" *ngIf="pelicula.actorlnk.length > 0">
+            <app-actores [pelicula]="pelicula"></app-actores>
+        </div>
+
+        <div class="row mt-3 w-100" *ngIf="pelicula.directorLnk.length > 0">
+            <app-directores [pelicula]="pelicula"></app-directores>
+        </div>
+    </div>
+</div>

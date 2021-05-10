@@ -11,7 +11,7 @@
                 <!-- Logo icon --><b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                        <p class="text-black-50">TalyCap-Global</p>
+                    <a href="javascript:void(0)" class="text-center db"><img class="img-thumbnail  w-50" src="../assets/images/logo-icon.png" alt="Home" /><br/></a>
 
                 </b>
                 <!--End Logo icon -->
@@ -58,10 +58,14 @@
 
                             <li><a [href]="'mailto:'+ProfileService.correo"><i class="ti-email"></i> {{ProfileService.correo}}</a></li>
 
+                            <li><a routerLink="/home"><i class="ti-home"></i> Home</a></li>
 
                             <li role="separator" class="divider"></li>
-                            <li><a routerLink="account-settings"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li role="separator" class="divider"></li>
+                            <li (click)="UsuarioService.cerraSession()">
+
+                                <i class="fa fa-power-off"></i> Logout
+
+                            </li>
 
                         </ul>
                     </div>

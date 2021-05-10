@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  urlAPI:"http://localhost:12345/api",
-  urlImagen:"http://localhost:12345/api/file"
+  urlAPI:"http://localhost:62254/api",
+  urlImagen:"http://localhost:62254/api/file"
 };
 
 /*

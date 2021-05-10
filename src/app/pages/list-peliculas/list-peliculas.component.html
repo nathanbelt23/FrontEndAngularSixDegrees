@@ -1,0 +1,109 @@
+<div class="animated bounceInDown">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-info  text-center" role="alert" *ngIf="booCargando">
+                        <div class="alert-heading">Cargando</div>
+                        <i class="fa fa-spin fa-refresh"> </i>
+                        <p class="mb-0"> por favor espera</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <h4 class="card-title">Peliculas ({{ Peliculas.length }})</h4>
+                            <h6 class="card-subtitle">
+                                lista
+                            </h6>
+                        </div>
+
+                        <div class="col">
+                            <div class="text-right">
+                                <button class="btn btn-primary" routerLink="/dashboard/pelicula/0">
+                                    <i class="fa fa-plus-circle" ></i> 
+                                    Crear Peliculas
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-responsive" *ngIf="!booCargando">
+
+
+                        <p-table [value]="Peliculas" id="excel-table" #dt1 dataKey="title" [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 20, 30]" styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['titulo']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex float-right">
+                                    <span class="p-input-icon-left p-ml-auto">
+                  <input
+                    pInputText
+                    type="text"
+                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search keyword"
+                  />
+                </span>
+                                </div>
+                            </ng-template>
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="titulo">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            titulo
+                                            <p-columnFilter type="text" field="titulo" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                    <th pSortableColumn="descripcion">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            descripcion
+                                            <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                    <th pSortableColumn="costoAlquiler">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Costo Alquiler
+                                            <p-columnFilter type="number" field="costoAlquiler" display="menu"></p-columnFilter>
+
+                                        </div>
+                                    </th>
+
+                                    <th class="text-center">
+                                        Cover
+
+                                    </th>
+
+                                    <th class="text-nowrap text-center">Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-car>
+                                <tr>
+                                    <td>{{ car.titulo }}</td>
+                                    <td>{{ car.descripcion|slice:0:50 }}..</td>
+                                    <td>{{ car.costoAlquiler }}</td>
+                                    <td class="text-center zoom"><img class="w-25 " [src]="car.urlPelicula|imagen:'peliculas'"></td>
+
+
+                                    <td class="text-nowrap text-center">
+
+                                        <button [routerLink]="['/dashboard/pelicula', car.peliculaID]" pButton pRipple class="p-button-rounded p-button-warning" icon="pi pi-pencil"></button> &nbsp;
+                                        <!-- <button (click)="delete(car.peliculaID)" pButton pRipple class="p-button-rounded p-button-warning" icon="pi pi-trash"></button> -->
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

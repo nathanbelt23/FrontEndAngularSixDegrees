@@ -1,0 +1,27 @@
+<p-carousel [value]="pelicula.actorlnk" styleClass="custom-carousel" [numVisible]="4" [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions" [style]="{'max-heigth':'350px', 'margin-top':'2em'}">
+
+    <ng-template pTemplate="header">
+        <h3>&nbsp; Actores</h3>
+    </ng-template>
+
+    <ng-template let-pelicula pTemplate="item">
+
+
+        <div class="card">
+
+            <div class="card-title">
+                {{pelicula.actorDirector.nombre}}
+
+            </div>
+            <div class="card-body zoom">
+                <img class="w-50 pelicula-image" [src]="pelicula.actorDirector.urlFoto|imagen:'actoresdirectores'">
+            </div>
+
+        </div>
+
+
+
+
+    </ng-template>
+
+</p-carousel>

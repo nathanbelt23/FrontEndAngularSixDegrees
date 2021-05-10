@@ -1,0 +1,136 @@
+<div class="animated bounceInDown">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-info  text-center" role="alert" *ngIf="booCargando">
+                        <div class="alert-heading">Cargando</div>
+                        <i class="fa fa-spin fa-refresh"> </i>
+                        <p class="mb-0"> por favor espera</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-9">
+                            <h4 class="card-title">Peliculas ({{ Peliculas.length }})</h4>
+                            <h6 class="card-subtitle">
+                                lista
+                            </h6>
+                        </div>
+                        <div class="col text-right">
+                            <button (click)="exportexcel()" class="btn btn-success float-lg-right"> <i class="fa fa-table" aria-hidden="true"></i>Export</button>
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-responsive" *ngIf="!booCargando">
+
+
+                        <p-table [value]="Peliculas" id="excel-table" #dt1 dataKey="title" [rows]="60" [showCurrentPageReport]="true" [rowsPerPageOptions]="[60, 100, 200]" styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['pelicula.titulo']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex float-right">
+                                    <span class="p-input-icon-left p-ml-auto">
+                  <input
+                    pInputText
+                    type="text"
+                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search keyword"
+                  />
+                </span>
+                                </div>
+                            </ng-template>
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="pelicula.titulo">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            titulo
+                                            <p-columnFilter type="text" field="titulo" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+
+
+                                    <th pSortableColumn="pelicula.costoAlquiler">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Costo Alquiler
+                                            <p-columnFilter type="number" field="costoAlquiler" display="menu"></p-columnFilter>
+
+                                        </div>
+                                    </th>
+
+                                    <th pSortableColumn="fechaAlquiler">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            fecha Alquiler
+
+
+                                        </div>
+                                    </th>
+
+
+                                    <th pSortableColumn="fechaDebeEntregar">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            fecha a entregar
+
+
+                                        </div>
+                                    </th>
+
+
+
+                                    <th pSortableColumn="FechaCancelacion">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            fecha a cancelar
+
+
+                                        </div>
+                                    </th>
+
+                                    <th pSortableColumn="estadoAlquiler">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Estado
+                                        </div>
+                                    </th>
+
+                                    <th pSortableColumn="nombreUsuario">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Usuario
+
+
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="userName">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Email
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-car>
+                                <tr>
+                                    <td>{{ car.pelicula.titulo }}</td>
+
+                                    <td>{{ car.pelicula.costoAlquiler|number }}</td>
+                                    <td>{{ car.fechaAlquiler|date:'yyyy-MM-dd'}}</td>
+                                    <td>{{ car.fechaDebeEntregar|date:'yyyy-MM-dd'}}</td>
+                                    <td>{{ car.fechaCancelacion|date:'yyyy-MM-dd'}} </td>
+                                    <td>{{ car.estadoAlquiler.nombre}}</td>
+                                    <td>{{ car.nombreUsuario}}</td>
+                                    <td>{{ car.userName}}</td>
+
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

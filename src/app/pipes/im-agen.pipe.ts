@@ -6,8 +6,10 @@ import { environment } from '../../environments/environment';
 })
 export class ImagenPipe implements PipeTransform {
 
-  transform(value: string, tipo: "cover"): string {
-  return `${urlImagen}/download/${value}`;
+  transform(value: string, tipo: string="peliculas"): string {
+
+    value= value.replace('"', '');
+  return `${urlImagen}/download/${value}/${tipo}`;
   
 
 }

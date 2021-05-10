@@ -1,0 +1,67 @@
+<div class="card animated bounceInDown">
+
+    <div class="card-body">
+        <h4 class="card-title">Edicion actor / director</h4>
+
+        <div class="row">
+
+
+            <div class="col-sm-8">
+                <form class="form p-t-20" [formGroup]="form" (ngSubmit)="save()">
+                    <div class="form-group">
+                        <label for="exampleInputuname">Nombre*</label>
+                        <div class="input-group ">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input [ngClass]="{'is-invalid': getControlValid('nombre')}" type="text" class="form-control" id="exampleInputuname" placeholder="Nombre" formControlName="nombre">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="checkbox checkbox-success">
+                            <input id="checkbox1" type="checkbox" formControlName="esActor" />
+                            <label for="checkbox1">Es Actor</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox2" type="checkbox" formControlName="esDirector" />
+                            <label for="checkbox2">Es Director</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname">URLFoto*</label>
+                        <div class="input-group ">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input [ngClass]="{'is-invalid': getControlValid('urlFoto')}" type="text" class="form-control" id="exampleInputuname" placeholder="urlFoto" readonly formControlName="urlFoto">
+                        </div>
+                    </div>
+
+
+                    <button type="submit" [disabled]="form.invalid" class="btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-life-saver"></i> Save</button>
+                    <button type="button" routerLink="/dashboard/actorDirector" class="btn btn-secondary waves-effect waves-light">   <i class="fa fa-arrow-circle-left"></i>   Return</button>
+                </form>
+            </div>
+
+            <div class="col-sm-4">
+
+                <div class="text-center">
+                    <img [src]="ActorDirector.urlFoto|imagen:'actoresdirectores'" *ngIf="!imgTemp" class="w-50">
+
+                    <img [src]="imgTemp" *ngIf="imgTemp" class="image-avatar" class="w-50">
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input accept="image/jpg, image/jpeg, image/png" type="file" class="form-control" id="customFile" (change)="subirImagen($event.target.files[0])" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

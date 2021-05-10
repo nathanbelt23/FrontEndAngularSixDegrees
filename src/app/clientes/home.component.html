@@ -1,0 +1,13 @@
+<div id="main-wrapper">
+
+    <app-header-client>
+    </app-header-client>
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+        <p-dialog header="Ingreso" [(visible)]="ModalLoginService.displayMaximizable" [modal]="true" [style]="{width: '70vw'}" [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+            <app-auth-container></app-auth-container>
+        </p-dialog>
+        <footer class="footer">
+            © 2021 Prueba de Yonathan Beltran
+        </footer>
+    </div>

@@ -1,0 +1,7 @@
+<div *ngIf="ModalLoginService.boolLogin">
+    <app-login></app-login>
+</div>
+
+<div *ngIf="!ModalLoginService.boolLogin">
+    <app-register></app-register>
+</div>

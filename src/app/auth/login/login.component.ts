@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UsuarioService } from '../../services/usuario-service.service';
+import { ModalLoginService } from '../../services/modal-login.service';
 
 @Component({
   selector: 'app-login',
@@ -11,28 +12,23 @@ import { UsuarioService } from '../../services/usuario-service.service';
 })
 export class LoginComponent implements OnInit {
 
-
+   mensage:string="";
   frmLogin = this.formBuilder.group(
     {
-      email: ['desarrollador@gmail.com', [Validators.required, Validators.minLength(3)]],
-      password: ['Colombia2021.', [Validators.required, Validators.minLength(3)]],
+      email: ['nathanbelt23@gmail.com', [Validators.required, Validators.minLength(3)]],
+      password: ['Password123$', [Validators.required, Validators.minLength(3)]],
       recordar: [false]
     }
   );
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
-    private UsuarioService: UsuarioService
+    private UsuarioService: UsuarioService,
+    public ModalLoginService:ModalLoginService,
+
 
   ) {
 
-    if (localStorage.getItem("usuario")) {
-      localStorage.removeItem("usuario");
-    }
-
-    if (localStorage.getItem("token")) {
-      localStorage.removeItem("token");
-    }
 
 
   }
@@ -49,31 +45,31 @@ export class LoginComponent implements OnInit {
 
   public login() {
     if (this.frmLogin.valid) {
+      this.ModalLoginService.mensaje="";
       this.UsuarioService.login(this.getValueControl("email"), this.getValueControl("password"))
         .subscribe(p => {
 
-          this.router.navigateByUrl('');
+           
+          Swal.fire(
+            {
+                icon:'success',
+                text:'Bienvenido',
+                timer:2000
+             }
+
+           );
+           this.ModalLoginService.eventLogin.emit(true);
+           this.ModalLoginService.cerrarModal();
+        },err => 
+        {
+            this.ModalLoginService.mensaje="Ingreso no valido";
+
         }
+        
+        
 
-          , (err: any) => {
-            console.log(err);
-
-            Swal.fire(
-              {
-                icon: 'error'
-                , text: "Ingreso no valido",
-                timer: 1500
-
-              }
-
-            );
-
-          }
-        );
-
+      );
     }
-
-
 
   }
 

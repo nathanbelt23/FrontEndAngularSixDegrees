@@ -16,14 +16,14 @@ export class SecutyLoginGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):boolean {
-     console.log('Can activate');
+  
      if(localStorage.getItem("token"))
      {
-      return  localStorage.getItem("token").length>0;
+      return  localStorage.getItem("token").length>0 &&  this.usuarioService.esAdmin();
      }
      else
      {
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/home');
 
      }
       

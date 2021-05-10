@@ -14,10 +14,21 @@ export class SidebarService {
         
         
         { titulo: 'Main', url: '/' },
-        { titulo: 'Activities', url: 'Activities' },
-        { titulo: 'Authors', url: 'Authors' },
-        { titulo: 'Books', url: 'Books' },
+        { titulo: 'Actor/Director', url: 'actorDirector' },
+
+        { titulo: 'Peliculas', url: 'peliculas' },
+
+        { titulo: 'Recepcion', url: 'recepcionPeliculas' },
+
+        { titulo: 'Reporte', url: 'reporteExcel' }
+        
+
+
+     /*
+
+       
         { titulo: 'Excel', url: 'Report' },
+        { titulo: 'Settings', url: 'Settings'},*/
         
 
 

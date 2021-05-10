@@ -1,0 +1,92 @@
+<div class="card">
+    <p-dataView #dv [value]="peliculas" [paginator]="true" [rows]="6" filterBy="titulo" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+        <ng-template pTemplate="header">
+            <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+                <p-dropdown [options]="sortOptions" placeholder="Ordenar por precio" (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+
+
+
+                <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                    <i class="pi pi-search"></i>
+                    <input type="text" pInputText placeholder="buscar por  titulo" (input)="dv.filter($event.target.value)">
+                </span>
+
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+
+
+        </ng-template>
+        <ng-template let-pelicula pTemplate="listItem">
+            <div class="p-12">
+                <div class="pelicula-list-item ">
+                    <div class="pelicula-list-detail pointer" (click)="verDetalle(pelicula)">
+                        <div class="pelicula-name">{{ pelicula.titulo }}</div>
+
+                        <div class="row">
+                            <div class="col-4 zoom">
+                                <img class="w-50 pointer  pelicula-image" [src]="pelicula.urlPelicula|imagen">
+
+                            </div>
+                            <div class="col-sm-8 ">
+                                <div class="product-description">{{pelicula.descripcion|slice:0:200}}...</div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="pelicula-list-action">
+                        <p-rating stars="10" [ngModel]="pelicula.estrellas" readonly="true"></p-rating>
+                        <span class="pelicula-price">${{ pelicula.costoAlquiler }}</span>
+                        <br>
+                        <br>
+
+                        <span class="badge badge-success" *ngIf="pelicula.disponible">
+                            Disponible
+                        </span>
+
+                        <span class="badge badge-secondary" *ngIf="!pelicula.disponible">
+                           No disponible
+                        </span>
+                        <br>
+                        <br>
+                        <p-button width="100%" icon="pi pi-shopping-cart" label="Add to Cart" [disabled]="!pelicula.disponible" (click)="alquilarFilme(pelicula)"></p-button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-pelicula pTemplate="gridItem">
+            <div class="p-col-12 p-md-4 text-center">
+                <div class="pelicula-grid-item ">
+                    <div class="pelicula-grid-item-top">
+
+                        <span class="pelicula-badge status-INSTOCK"></span>
+                    </div>
+                    <div class="pelicula-grid-item-content pointer" (click)="verDetalle(pelicula)">
+                        <div class="pelicula-name">{{pelicula.titulo}}</div>
+                        <img class="w-50 pointer  zoom " [src]="pelicula.urlPelicula|imagen">
+                        <p-rating [ngModel]="pelicula.estrellas" stars="10" [readonly]="true" [cancel]="false"></p-rating>
+                        <br>
+                    </div>
+                    <div class="pelicula-grid-item-bottom text-center">
+
+                        <span class="pelicula-price"><strong>Alquiler </strong> {{pelicula.costoAlquiler|number}}</span>
+                        <br>
+                        <br>
+
+                        <span class="badge badge-success" *ngIf="pelicula.disponible">
+                            Disponible
+                        </span>
+
+                        <span class="badge badge-secondary" *ngIf="!pelicula.disponible">
+                           No disponible
+                        </span>
+                        <br>
+                        <br>
+                        <p-button *ngIf="pelicula.disponible" width="100%" icon="pi pi-shopping-cart" label="Add to Cart" [disabled]="!pelicula.disponible" (click)="ManejoComprasService.alquilarFilme(pelicula)"></p-button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

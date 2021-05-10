@@ -1,0 +1,35 @@
+<p-carousel [value]="peliculas" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions" [style]="{ 'max-heigth': '350px', 'margin-top': '2em' }">
+    <ng-template pTemplate="header"> </ng-template>
+
+    <ng-template let-pelicula pTemplate="item">
+        <div class="row col-12 text-center">
+            <div class="col-6">
+                <img class="w-25 pelicula-image zoom pointer" [src]="pelicula.urlPelicula | imagen" />
+            </div>
+            <div class="col-5">
+                <h1 class="card-title">{{ pelicula.titulo }}</h1>
+                <p class="text-justify m-1">
+                    {{ pelicula.descripcion }}
+                </p>
+
+                <p class="text-justify m-1">
+                    <strong>Alquiler</strong> {{ pelicula.costoAlquiler | number }}
+                </p>
+                <div class="car-buttons">
+                    <span class="badge badge-success" *ngIf="pelicula.disponible">
+            Disponible
+          </span>
+
+                    <span class="badge badge-secondary" *ngIf="!pelicula.disponible">
+            No disponible
+          </span>
+                    <br />
+                    <br />
+                    <p-button *ngIf="pelicula.disponible" width="100%" icon="pi pi-shopping-cart" label="Add to Cart" [disabled]="!pelicula.disponible" (click)="ManejoComprasService.alquilarFilme(pelicula)"></p-button>
+                    &nbsp;
+                    <p-button (click)="verDetalle(pelicula)" width="100%" styleClass="p-button-warning" icon="pi pi-search" label="Ver"></p-button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>

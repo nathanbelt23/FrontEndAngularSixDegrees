@@ -7,12 +7,13 @@ import { AuthRoutingModule } from './auth/auth.routing';
 
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { SecutyLoginGuard } from './guards/secuty-login.guard';
+import { ClientesRoutingModule } from './clientes/clientes-routing';
 
 
 const routes: Routes = [
 
 
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full'      ,   canActivate: [ SecutyLoginGuard],},
+  { path: '', redirectTo: '/home', pathMatch: 'full'      },
   { path: '**', component: NopagefoundComponent },
     
 
@@ -24,7 +25,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot( routes ),
     PagesRoutingModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ClientesRoutingModule
   ],
   exports: [ RouterModule ]
 })

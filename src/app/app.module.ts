@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule  }  from '@angular/common/http';
 
 
@@ -13,15 +13,18 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { PipesModule } from './pipes/pipes.module';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
+import  { registerLocaleData }  from '@angular/common';
+import  localEs   from '@angular/common/locales/es';
+import { ClientesModule } from './clientes/clientes.module';
 
 
-
-
+registerLocaleData(localEs);
 
 @NgModule({
   declarations: [
     AppComponent,
     NopagefoundComponent,
+
 
   ],
   imports: [
@@ -32,12 +35,19 @@ import { CalendarModule } from 'primeng/calendar';
     HttpClientModule,
     PipesModule,
     TableModule,
-    CalendarModule
+    CalendarModule,
+    ClientesModule
 
 ],
   exports:[
 
   ], 
   bootstrap: [AppComponent]
+, providers:[{
+provide:LOCALE_ID,
+useValue:"es"
+
+}]
+
 })
 export class AppModule { }

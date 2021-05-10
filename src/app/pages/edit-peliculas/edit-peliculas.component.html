@@ -1,0 +1,198 @@
+<div class="row animated bounceInDown">
+
+    <div class="col-sm-6">
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Edicion de pelicula</h4>
+                <form class="form p-t-20" [formGroup]="form" (ngSubmit)="save()">
+                    <div class="form-group">
+                        <label for="exampleInputuname">Titulo*</label>
+                        <div class="input-group col-11">
+                            <div class="input-group-addon"><i class="ti-flag"></i></div>
+                            <input [ngClass]="{ 'is-invalid': getControlValid('titulo') }" type="text" class="form-control" id="exampleInputuname" placeholder="Title" formControlName="titulo" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname">Descripcion*</label>
+                        <div class="input-group col-11">
+                            <div class="input-group-addon"><i class="ti-dropbox"></i></div>
+                            <textarea rows="3" [ngClass]="{ 'is-invalid': getControlValid('descripcion') }" class="form-control" id="exampleInputuname" placeholder="Descripcion" formControlName="descripcion"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname">Costo Alquiler*</label>
+                        <div class="input-group col-11">
+                            <div class="input-group-addon"><i class="ti-agenda"></i></div>
+                            <input [ngClass]="{ 'is-invalid': getControlValid('costoAlquiler') }" type="number" class="form-control" id="exampleInputuname" placeholder="costoAlquiler" formControlName="costoAlquiler" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname">cantidad Peliculas*</label>
+                        <div class="input-group col-11">
+                            <div class="input-group-addon"><i class="ti-camera"></i></div>
+                            <input [ngClass]="{ 'is-invalid': getControlValid('cantidadPeliculas') }" type="number" class="form-control" id="exampleInputuname" placeholder="cantidad de peliculas" formControlName="cantidadPeliculas" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname">Estrellas*</label>
+                        <div class="input-group col-11">
+                            <div class="input-group-addon"><i class="ti-star"></i></div>
+                            <input [ngClass]="{ 'is-invalid': getControlValid('cantidadPeliculas') }" type="number" class="form-control" id="exampleInputuname" placeholder="estrellas" formControlName="estrellas" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname">url Pelicula*</label>
+                        <div class="input-group col-11">
+                            <div class="input-group-addon"><i class="ti-world"></i></div>
+                            <input readonly [ngClass]="{ 'is-invalid': getControlValid('urlPelicula') }" type="text" class="form-control" id="exampleInputuname" placeholder="urlPelicula" formControlName="urlPelicula" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">lanzamiento *</label>
+                        <div class="p-field p-col-11 p-md-11">
+                            <p-calendar [locale]="es" class="col-5" readonlyInput name="entryDate" formControlName="lanzamiento" [showIcon]="true" inputId="icon" dateFormat="yy-mm-dd" inputId="spanish" inputId="basic"></p-calendar>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox checkbox-success">
+                            <input id="checkbox1" type="checkbox" formControlName="disponible" />
+                            <label for="checkbox1"> Disponible!!!</label>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                <i class="fa fa-life-saver"></i> Save
+              </button>
+                    <button type="button" routerLink="/dashboard/peliculas" class="btn btn-secondary waves-effect waves-light">
+                <i class="fa fa-arrow-circle-left"></i> Return
+              </button>
+                </form>
+                <hr />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card">
+            <p-tabView>
+
+                <p-tabPanel header="Cover" leftIcon="pi pi-camera" tooltip="Cover">
+                    <div class="w-100 text-center">
+
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="text-center">
+                                    <img [src]="Pelicula.urlPelicula|imagen:'peliculas'" *ngIf="!imgTemp" class="w-50">
+
+                                    <img [src]="imgTemp" *ngIf="imgTemp" class="image-avatar" class="w-75">
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input accept="image/jpg, image/jpeg, image/png" type="file" class="form-control" id="customFile" (change)="subirImagen($event.target.files[0])" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </p-tabPanel>
+
+                <p-tabPanel header="Actores" leftIcon="pi pi-user" tooltip="Actores">
+                    <p-table [value]="Actores" id="excel-table" #dt1 dataKey="title" [rows]="7" [showCurrentPageReport]="true" [rowsPerPageOptions]="[7, 20, 30]" styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [globalFilterFields]="['nombre']">
+
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="nombre">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Nombre
+                                        <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+
+                                <th class="text-center">Cover</th>
+
+                                <th class="text-nowrap text-center">Seleccionado</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-car>
+                            <tr>
+                                <td>{{ car.nombre }}
+
+                                </td>
+
+
+                                <td class="text-center"><img class="w-25 " [src]="car.urlFoto|imagen:'actoresdirectores'"></td>
+
+
+                                <td class="text-nowrap text-center">
+                                    <div class="checkbox checkbox-success">
+                                        <input [id]="'checkbox1'+car.actorDirectorID" [(ngModel)]="car.seleccionado" type="checkbox" />
+                                        <label [for]="'checkbox1'+car.actorDirectorID"></label>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+                <p-tabPanel header="Directores" rightIcon="pi pi-user" tooltip="Directores">
+
+                    <p-table [value]="Directores" id="excel-table" #dt1 dataKey="title" [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 20, 30]" styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [globalFilterFields]="['nombre']">
+
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="nombre">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Nombre
+                                        <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+
+                                <th class="text-center">Cover</th>
+
+                                <th class="text-nowrap text-center">Seleccionado</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-car>
+                            <tr>
+                                <td>{{ car.nombre }}
+
+                                </td>
+
+
+                                <td class="text-center"><img class="w-25 " [src]="car.urlFoto|imagen:'actoresdirectores'"></td>
+
+
+                                <td class="text-nowrap text-center">
+                                    <div class="checkbox checkbox-success">
+                                        <input [id]="'checkboxdir1'+car.actorDirectorID" [(ngModel)]="car.seleccionado" type="checkbox" />
+                                        <label [for]="'checkboxdir1'+car.actorDirectorID"></label>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>
